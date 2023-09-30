@@ -2,30 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>User Authentication</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+  <title>NASA Image of the Day</title>
 </head>
 <body>
-  <div id="signup-page" class="page">
-    <!-- Signup form elements -->
-    <label for="name">Name:</label>
-    <input type="text" id="name" required>
-    <label for="email">Email:</label>
-    <input type="email" id="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" required>
-    <button onclick="signup()">Signup</button>
-    <div id="signup-message"></div>
+  <div class="container">
+    <h1>NASA Image of the Day</h1>
+    <form id="search-form">
+      <label for="search-input">Select a date:</label>
+      <input type="date" id="search-input">
+      <button type="submit">
+        <span class="icon"><i class="fas fa-search"></i></span> Search
+      </button>
+    </form>
+    <div id="current-image-container">
+      <!-- Current image will be displayed here -->
+    </div>
+    <h2>Search History</h2>
+    <ul id="search-history">
+      <!-- Search history will be displayed here -->
+    </ul>
   </div>
-
-  <div id="profile-page" class="page">
-    <!-- Profile display -->
-    <h2>Welcome to your profile</h2>
-    <div id="user-details"></div>
-    <button onclick="logout()">Logout</button>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>

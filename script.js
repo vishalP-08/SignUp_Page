@@ -1,55 +1,58 @@
-// Function to generate a random 16-byte access token
-function generateAccessToken() {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let token = '';
-        for (let i = 0; i < 16; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length);
-          token += characters[randomIndex];
-        }
-        return token;
-      }
-      
-      // Function to handle signup
-      function signup() {
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-      
-        // Generate access token
-        const accessToken = generateAccessToken();
-      
-        // Store user details and access token in local storage
-        const user = {
-          name,
-          email,
-          accessToken
-        };
-        localStorage.setItem('user', JSON.stringify(user));
-      
-        // Display success message and redirect to profile page
-        const signupMessage = document.getElementById('signup-message');
-        signupMessage.innerText = 'Signup successful!';
-        document.getElementById('signup-page').style.display = 'none';
-        document.getElementById('profile-page').style.display = 'block';
-        displayUserProfile();
-      }
-      
-      // Function to display user profile
-      function displayUserProfile() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const userDetails = document.getElementById('user-details');
-        userDetails.innerHTML = `
-          <p>Name: ${user.name}</p>
-          <p>Email: ${user.email}</p>
-          <p>Access Token: ${user.accessToken}</p>
-        `;
-      }
-      
-      // Function to handle logout
-      function logout() {
-        // Clear local storage and redirect to signup page
-        localStorage.removeItem('user');
-        document.getElementById('profile-page').style.display = 'none';
-        document.getElementById('signup-page').style.display = 'block';
-      }
-      
+const apiKey = 'Jv9jjrRErdCu3qjEjyVxULWgUZpOuOZgfzv0SSfj';  // Replace with your NASA API key
+
+function getCurrentImageOfTheDay() {
+  const currentDate = new Date().toISOString().split("T")[0];
+  getImageOfTheDay(currentDate);
+}
+
+function getImageOfTheDay(date) {
+  const url = `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      displayImage(data);
+      saveSearch(date);
+      addSearchToHistory(date);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+function displayImage(data) {
+  const imageContainer = document.getElementById('current-image-container');
+  imageContainer.innerHTML = `
+    <h2>${data.title}</h2>
+    <img src="${data.url}" alt="${data.title}">
+    <p>${data.explanation}</p>
+  `;
+}
+
+function saveSearch(date) {
+  let searches = JSON.parse(localStorage.getItem('searches')) || [];
+  searches.push(date);
+  localStorage.setItem('searches', JSON.stringify(searches));
+}
+
+function addSearchToHistory(date) {
+  const searchHistory = document.getElementById('search-history');
+  const listItem = document.createElement('li');
+  listItem.textContent = date;
+
+  listItem.addEventListener('click', () => {
+    getImageOfTheDay(date);
+  });
+
+  searchHistory.appendChild(listItem);
+}
+
+document.getElementById('search-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const date = document.getElementById('search-input').value;
+  getImageOfTheDay(date);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  getCurrentImageOfTheDay();
+  const savedSearches = JSON.parse(localStorage.getItem('searches')) || [];
+  savedSearches.forEach(date => addSearchToHistory(date));
+});
