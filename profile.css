@@ -1,0 +1,105 @@
+body {
+    background-image: url('Design/Background Pattern.png');
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    font-family: 'Mulish', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    header h1 {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 30px;
+        margin-bottom: 5px;
+        color:#625BF7;
+        
+    }
+    
+    header p {
+        font-size: 29px;
+        line-height: 30.12px;
+        margin-bottom: 25px;
+        color: #333333;
+        text-align: center;
+    }
+    
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    .card {
+        background-color: #fff;
+        border-radius: 12px; /* Increase the border radius for rounded corners */
+        padding: 30px; /* Increase padding for more space inside the card */
+        width: 400px; /* Increase the width */
+        height: 500px; /* Increase the height */
+        margin: 20px auto; /* Center the card horizontally with some top margin */
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Adjust box-shadow for a subtle effect */
+        text-align: center;
+    }
+    
+    .vector-arts {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom:5px;
+        padding-top: 10px;
+    }
+    
+    .vector-art {
+        margin: 0 65px;
+    }
+    
+    #user-details {
+        font-size: large;
+        text-align: center;
+        margin-bottom: 5px;
+        overflow: hidden; /* Add this property to prevent overflow */
+    white-space: nowrap; /* Prevent wrapping to the next line */
+    text-overflow: ellipsis; /* Add an ellipsis (...) if the text overflows */
+    }
+    
+    #user-details p {
+        margin: 28px 0;
+    }
+    
+    #logout-btn {
+        background: linear-gradient(180deg, #625BF7 0%, #463EEA 100%);
+    color: #fff;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    border:none;
+    }
+    #logout-btn:hover {
+        background: linear-gradient(180deg, #463EEA 0%, #4539f6 100%);
+        color: #fff;
+    }
+
+    /* Responsive styles using media queries */
+
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 90%;
+    }
+
+    .vector-arts {
+        flex-direction: column;
+    }
+
+    .vector-art {
+        margin: 10px 0;
+    }
+}
